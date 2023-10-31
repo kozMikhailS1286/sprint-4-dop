@@ -1,5 +1,6 @@
 import { Desk } from './decks-api'
 
+
 const initialState = {
   decks: [] as Desk[], // todo: add type
   searchParams: {
@@ -9,18 +10,26 @@ const initialState = {
 
 type DecksState = typeof initialState
 
-export const decksReducer = (state: DecksState = initialState, action: DesksAction): DecksState => {
+export const decksReducer = (state: DecksState = initialState, action: DecksAction): DecksState => {
   switch (action.type) {
-    case "DESKS/SET-DESKS":
+    case 'DECKS/SET-DECKS':
       return {
         ...state,
-        decks: action.desks
+        decks: action.desks,
       }
+    case 'DECKS/ADD-DECK':
+      return {
+        ...state,
+        decks: [action.deck, ...state.decks]
+      }
+    default:
+      return state
   }
-  return state
 }
 
-type DesksAction = ReturnType<typeof setDesksAC>
+export type DecksAction = ReturnType<typeof setDecksAC>
+                        | ReturnType<typeof addDeckAC>
 
 
-export const setDesksAC = (desks: Desk[]) => ({type: "DESKS/SET-DESKS", desks} as const)
+export const setDecksAC = (desks: Desk[]) => ({type: "DECKS/SET-DECKS", desks} as const)
+export const addDeckAC = (deck: Desk) => ({type: "DECKS/ADD-DECK", deck} as const)

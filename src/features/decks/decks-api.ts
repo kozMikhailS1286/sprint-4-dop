@@ -8,9 +8,14 @@ export const instance = axios.create({
 })
 
 export const decksAPI = {
-  fetchDesks() {
+  fetchDecks() {
     return instance.get<FetchDesksResponse>('/decks');
   },
+  addDeck(name: string) {
+    return instance.post<Desk>('/decks', {
+      name
+    })
+  }
 }
 
 export interface FetchDesksResponse {
