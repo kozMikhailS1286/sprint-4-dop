@@ -1,4 +1,5 @@
 import { Desk } from './decks-api'
+import { setErrorAC, setStatusAC } from '../../app/app-reducer'
 
 
 const initialState = {
@@ -29,6 +30,8 @@ export const decksReducer = (state: DecksState = initialState, action: DecksActi
 
 export type DecksAction = ReturnType<typeof setDecksAC>
                         | ReturnType<typeof addDeckAC>
+                        | ReturnType<typeof setStatusAC>
+                        | ReturnType<typeof setErrorAC>
 
 
 export const setDecksAC = (desks: Desk[]) => ({type: "DECKS/SET-DECKS", desks} as const)
